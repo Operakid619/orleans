@@ -32,7 +32,7 @@ namespace Orleans.Runtime
             if (collection is ICollection<T> { Count: 0 })
                 return putInBrackets ? "[]" : "";
 
-            var enumerator = collection.GetEnumerator();
+            using var enumerator = collection.GetEnumerator();
             if (!enumerator.MoveNext())
                 return putInBrackets ? "[]" : "";
 
@@ -89,7 +89,7 @@ namespace Orleans.Runtime
                 separator = Environment.NewLine;
             }
             var sb = new StringBuilder("[");
-            var enumerator = dict.GetEnumerator();
+            using var enumerator = dict.GetEnumerator();
             int index = 0;
             while (enumerator.MoveNext())
             {
